@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food and Beverage</title>
+  <style>
+    :root {
+      --red: #FF0000;
+      --black: #000000;
+      --blue: #0000FF;
+      --white: #ffffff;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(to right, var(--black) 0%, var(--red) 50%, var(--blue) 100%);
+      background-attachment: fixed;
+      color: var(--white);
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    header {
+      background-color: var(--black);
+      color: var(--white);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--red);
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--red);
+    }
+    .hero {
+      height: 80vh;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 0, 0, 0.6), rgba(0, 0, 255, 0.5)), url('Restoran_premium.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-content {
+      max-width: 800px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    .btn {
+      padding: 12px 30px;
+      background-color: var(--red);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    .btn:hover {
+      background-color: var(--white);
+      color: var(--red);
+    }
+    section {
+      scroll-margin-top: 120px;
+    }
+    .section-title {
+      text-align: center;
+      margin: 100px 0 40px;
+      font-size: 36px;
+    }
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .menu-card {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease, z-index 0.3s;
+      position: relative;
+      z-index: 0;
+      transform: scale(1);
+    }
+    .menu-card.hover {
+      transform: scale(1.08);
+      z-index: 10;
+    }
+    .menu-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .menu-card-body {
+      padding: 20px;
+      color: var(--black);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .menu-card-body .desc,
+    .menu-card-body .price {
+      display: none;
+    }
+    .menu-card.hover .desc,
+    .menu-card.hover .price {
+      display: block;
+    }
+    .menu-card.hover .menu-name {
+      margin-bottom: 10px;
+    }
+    .menu-card-body .menu-name {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .food {
+      border-bottom: 5px solid var(--red);
+    }
+    #beverage {
+      margin-bottom: 100px;
+    }
+    footer {
+      background-color: var(--black);
+      color: var(--white);
+      padding: 40px 0 20px;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+    .footer-column h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: var(--red);
+    }
+    .footer-column p, .footer-column a {
+      margin-bottom: 10px;
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+    }
+    .footer-column a:hover {
+      color: var(--red);
+    }
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background-color: var(--blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .social-links a:hover {
+      transform: translateY(-5px);
+      background-color: var(--red);
+      color: var(--white);
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">Farhan Together Cafe</div>
+      <div class="nav-links">
+        <a href="#home">Beranda</a>
+        <a href="#food">Food</a>
+        <a href="#beverage">Beverage</a>
+        <a href="#contact">Hubungi</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Temukan makanan cepat saji disini</h1>
+      <p>Temukan makanan dan minuman cepat saji premium dari bahan-bahan terbaik dan dimasak oleh koki kelas atas</p>
+      <a href="#food" class="btn">Explore Menu</a>
+    </div>
+  </section>
+
+  <!-- Food Section -->
+  <section class="container" id="food">
+    <h2 class="section-title">Our Signature Food</h2>
+    <div class="menu-container">
+      <!-- Menu-card isi makanan -->
+      <div class="menu-card food">
+        <img src="Gourmet_burger.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Gourmet Burger</h3>
+          <p class="desc">Menggunakan daging premium dengan saos sambal dan sayuran yang dipetik langsung dari petani lokal </p>
+          <span class="price">Rp 35.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Pizza_authentik.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Pizza Autentik</h3>
+          <p class="desc">Adonan dengan toping premium dan mozarela</p>
+          <span class="price">Rp. 75.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Ayam_krispi.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Ayam Krispi</h3>
+          <p class="desc">Ayam krispi dengan saus spesial</p>
+          <span class="price">Rp 18.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Burger_ayam.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Burger Ayam</h3>
+          <p class="desc">Menggunakan daging ayam dengan kualitas tinggi</p>
+          <span class="price">Rp 28.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Corndog.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Hot dog Jumbo</h3>
+          <p class="desc">Roti panjang isi sosis jumbo, saus mustard, tomat, dan mayones.</p>
+          <span class="price">Rp 30.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Onion_ring.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Onion Ring</h3>
+          <p class="desc">Cincin bawang goreng krispi dengan tepung renyah.</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Kentang_goreng.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Kentang Goreng</h3>
+          <p class="desc">Kentang goreng dengan saus sambal spesial</p>
+          <span class="price">Rp 16.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Mozarella_stik.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Mozarela Stick</h3>
+          <p class="desc">Keju mozarela goreng, renyah diluar lumer dimulut</p>
+          <span class="price">Rp 22.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Nugget.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Nugget</h3>
+          <p class="desc">Nugget ayam renyah dengan cita rasa gurih menggoda.</p>
+          <span class="price">Rp 16.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Risol_mayo.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Risol Mayo</h3>
+          <p class="desc">Kulit risol renyah berisi campuran mayones, telur, dan smoked beef</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Cimol.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Cimol</h3>
+          <p class="desc">Cimol kenyal khas Bandung, digoreng hingga merekah, disajikan dengan taburan bumbu gurih pilihan.</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Bakwan.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Bakwan Sayur</h3>
+          <p class="desc">Gorengan tradisional dengan isian sayuran segar seperti wortel dan kol, gurih dan renyah.</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Cireng.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Cireng</h3>
+          <p class="desc">Cireng kenyal khas Sunda yang digoreng hingga renyah di luar, disajikan dengan bumbu rujak atau sambal sebagai pelengkap.</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Sosis.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Sosis Bakar</h3>
+          <p class="desc">Sosis panggang dengan olesan saus manis pedas, aroma smokey yang menggugah selera.</p>
+          <span class="price">Rp 10.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card food">
+        <img src="Sosis_goreng.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Sosis Bakar</h3>
+          <p class="desc">Sosis digoreng hingga kecoklatan, renyah di luar dan juicy di dalam — camilan favorit segala usia.</p>
+          <span class="price">Rp 10.000.00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beverage Section -->
+  <section class="container" id="beverage">
+    <h2 class="section-title">Refreshing Beverages</h2>
+    <div class="menu-container">
+      <div class="menu-card beverage">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fe9db67c-6b23-406c-858f-61228e30eea2.png" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Kopi Es</h3>
+          <p class="desc">Perpaduan espresso dan susu segar dengan sentuhan manis gula aren. Disajikan dingin untuk sensasi segar dan creamy khas kopi kekinian.</p>
+          <span class="price">Rp 18.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a5984977-7e95-4fe4-93e6-bdcc7f78af49.png" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Limun Segar</h3>
+          <p class="desc">Minuman dingin dari perasan lemon asli, dicampur madu atau gula cair. Rasanya asam-manis menyegarkan, cocok untuk melepaskan dahaga.</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Mojito.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Mojito (non alcohol)</h3>
+          <p class="desc">Mocktail menyegarkan dari campuran jeruk nipis, daun mint, soda, dan es batu. Rasa segar dengan aroma mint yang bikin adem seketika.</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="East_blue.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">East Blue</h3>
+          <p class="desc">Minuman segar berwarna biru cerah dengan rasa buah tropis.</p>
+          <span class="price">Rp. 25.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Citrus_bloom.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Citrus Bloom</h3>
+          <p class="desc">Minuman mocktail segar dengan perpaduan jeruk, lemon, dan lime.</p>
+          <span class="price">Rp. 25.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Thaitea.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Thai Tea</h3>
+          <p class="desc">Teh hitam khas Thailand dengan rasa manis dan creamy, disajikan dingin untuk kesegaran maksimal.</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Lattecool.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Kopi Latte (Panas)</h3>
+          <p class="desc">Kopi espresso dengan campuran susu hangat, menghasilkan rasa lembut dan menenangkan.</p>
+          <span class="price">Rp 18.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Lattehot.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Kopi Latte (es)</h3>
+          <p class="desc">Perpaduan espresso dan susu dingin yang creamy, disajikan dengan es untuk rasa segar dan ringan.</p>
+          <span class="price">Rp 20.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Americano.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Americano</h3>
+          <p class="desc">Espresso yang dipadukan dengan air panas, memberikan rasa kopi hitam yang ringan dan aromatik.</p>
+          <span class="price">Rp 15.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Boba.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Boba</h3>
+          <p class="desc">Susu segar dengan gula aren kental dan boba kenyal. Perpaduan manis dan tekstur chewy yang jadi favorit semua kalangan.</p>
+          <span class="price">Rp 20.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Matcha.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Matcha Latte</h3>
+          <p class="desc">Campuran bubuk teh hijau premium dengan susu creamy, disajikan panas atau dingin. Aroma matcha yang khas dengan rasa yang menenangkan.</p>
+          <span class="price">Rp 18.000.00</span>
+        </div>
+      </div>
+      <div class="menu-card beverage">
+        <img src="Choco_Oreo_Frappe.jpg" />
+        <div class="menu-card-body">
+          <h3 class="menu-name">Choco Oreo Frappe</h3>
+          <p class="desc">Minuman dingin berbasis cokelat, diblend dengan biskuit Oreo dan es, lalu diberi topping whipped cream </p>
+          <span class="price">Rp 23.000.00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer id="contact">
+    <div class="container footer-content">
+      <div class="footer-column">
+      <h3>Tentang kami</h3>
+        <p style="text-align: justify; line-height: 1.6;">
+          Farhan Together Café adalah tempat nongkrong seru dengan sajian favorit semua kalangan — dari junkfood lezat sampai minuman kekinian yang lagi hits! Kami percaya bahwa camilan dan minuman enak bisa bikin suasana jadi lebih akrab, seru, dan santai. Mulai dari kentang goreng, nugget, cireng, hingga kopi susu dan mojito, semua kami sajikan dengan rasa terbaik dan harga bersahabat. Nikmati waktu bersama teman, keluarga, atau diri sendiri — bareng Farhan Together Café.
+        </p>
+    </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <a href="#home">Home</a>
+        <a href="#food">Menu</a>
+        <a href="#beverage">Beverage</a>
+      </div>
+      <div class="footer-column">
+        <h3>Hubungi</h3>
+        <p>123 Main Street, Cityville</p>
+        <p>Phone: 082198765432</p>
+        <p>Email: farhantogethercafe@gmail.com</p>
+        <div class="social-links">
+          <a href="#">FB</a>
+          <a href="#">IG</a>
+          <a href="#">X</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2025 Farhan Together Café. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  const cards = document.querySelectorAll('.menu-card');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      cards.forEach(c => c.classList.remove('hover'));
+      card.classList.add('hover');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('hover');
+    });
+  });
+  </script>
+</body>
+</html>
